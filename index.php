@@ -26,7 +26,3 @@ if (!isset($_ENV['PROJECT_PHP_SERVER'])) {
         $config = array_merge(connectFiles($Default), connectFiles($Production));
     }
 }
-
-echo '<pre>';
-print_r($config);
-echo '</pre>';
