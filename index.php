@@ -1,28 +1,39 @@
 <?php
-function getFilesName($nameDir)
+
+function myAutoload($script)
 {
-    return array_diff(scandir($nameDir), ['..', '.']);
-}
-
-function connectFiles($nameDir)
-{
-    $files = getFilesName($nameDir);
-    foreach ($files as $val) {
-        $config[$val] = include $nameDir.$val;
-    }
-    return $config;
-}
-
-$Default = './Config/Default/';
-$Development = './Config/Development/';
-$Production = './Config/Production/';
-
-if (!isset($_ENV['PROJECT_PHP_SERVER'])) {
-    $config = connectFiles($Default);
-} else {
-    if (isset($_ENV['PROJECT_PHP_SERVER']) && $_ENV['PROJECT_PHP_SERVER'] == 'development') {
-        $config = array_merge(connectFiles($Default), connectFiles($Development));
-    } elseif (isset($_ENV['PROJECT_PHP_SERVER']) && $_ENV['PROJECT_PHP_SERVER'] == 'production') {
-        $config = array_merge(connectFiles($Default), connectFiles($Production));
+    if ($_SERVER['SCRIPT_NAME'] != '/'.$script) {
+        //$filename = $script . '.php';
+        echo 'Спроба під\'єднати файл '.$script.'<br>';
+        include_once $script;
+        echo '<br>';
     }
 }
+
+spl_autoload_register(myAutoload);
+
+$dir = array_diff(scandir(__DIR__), ['..', '.']);
+
+echo '<h4>Архив до обробки:</h4>';
+echo '<pre>';
+print_r($dir);
+echo '</pre>';
+
+foreach ($dir as $key => &$val) {
+    if (!is_file($val)) {
+        //echo 'No file: '.$val.'<br>';
+        unset($dir[$key]);
+    } else {
+        //echo 'File: '.$val.'<br>';
+        myAutoload($val);
+    }
+}
+
+echo '<h4>Архив після обробки:</h4>';
+echo '<pre>';
+print_r(array_values($dir));
+echo '</pre>';
+
+$scr02 = new Script02();
+$scr03 = new Script03();
+$scr04 = new Script04();
