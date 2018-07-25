@@ -1,39 +1,15 @@
 <?php
 
-function myAutoload($script)
+ob_start();
+
 {
-    if ($_SERVER['SCRIPT_NAME'] != '/'.$script) {
-        //$filename = $script . '.php';
-        echo 'Спроба під\'єднати файл '.$script.'<br>';
-        include_once $script;
-        echo '<br>';
-    }
+    echo 'hello';
+    $a = ob_get_contents();
+    ob_clean();
+    echo 'world';
+    $b = ob_get_contents();
 }
 
-spl_autoload_register(myAutoload);
+ob_end_clean();
 
-$dir = array_diff(scandir(__DIR__), ['..', '.']);
-
-echo '<h4>Архив до обробки:</h4>';
-echo '<pre>';
-print_r($dir);
-echo '</pre>';
-
-foreach ($dir as $key => &$val) {
-    if (!is_file($val)) {
-        //echo 'No file: '.$val.'<br>';
-        unset($dir[$key]);
-    } else {
-        //echo 'File: '.$val.'<br>';
-        myAutoload($val);
-    }
-}
-
-echo '<h4>Архив після обробки:</h4>';
-echo '<pre>';
-print_r(array_values($dir));
-echo '</pre>';
-
-$scr02 = new Script02();
-$scr03 = new Script03();
-$scr04 = new Script04();
+echo $a.' '.$b;
