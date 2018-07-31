@@ -12,6 +12,18 @@ function myHandler($level, $message, $file, $line, $context)
         case E_NOTICE:
             $type = 'Notice';
             break;
+        case E_USER_WARNING:
+            $type = 'User Warning';
+            break;
+        case E_USER_NOTICE:
+            $type = 'User Notice';
+            break;
+        case E_DEPRECATED:
+            $type = 'Depricated';
+            break;
+        case E_USER_DEPRECATED:
+            $type = 'User Depricated';
+            break;
         default:
             return false;
     }
