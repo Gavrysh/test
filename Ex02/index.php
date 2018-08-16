@@ -12,6 +12,7 @@ ini_set('display_errors', 1);
 require_once 'ShopProduct.php';
 require_once 'DiskProducts.php';
 require_once 'BooksProducts.php';
+require_once 'ShopProductWriter.php';
 
 $product1 = new ShopProduct('Собачье сердце', 'Михаил', 'Булгаков', 297.15);
 $product2 = new DiskProducts('Мова риб', 'Кузьма', 'Скрябін', '67.00', '120');
@@ -20,3 +21,5 @@ $product3 = new BooksProducts('Совершенньій код', 'Стив', 'М
 echo $product1->getSummaryLine();
 echo $product2->getSummaryLine();
 echo $product3->getSummaryLine();
+
+//$writer = new ShopProductWriter();

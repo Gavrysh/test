@@ -8,7 +8,7 @@
 
 class DiskProducts extends ShopProduct
 {
-    public $playLength;
+    private $playLength = 0;
 
     public function __construct($title, $firstName, $lastName, $price, $playlength)
     {

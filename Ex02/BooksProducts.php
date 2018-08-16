@@ -8,7 +8,7 @@
 
 class BooksProducts extends ShopProduct
 {
-    public $numPages;
+    private $numPages = 0;
 
     public function __construct($title, $firstName, $lastName, $price, $numPages)
     {
@@ -24,5 +24,10 @@ class BooksProducts extends ShopProduct
     public function getSummaryLine()
     {
         return '<br>'.parent::getSummaryLine().'; Количество страниц: '.$this->numPages.' стр.';
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
     }
 }
